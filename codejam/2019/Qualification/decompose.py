@@ -1,9 +1,8 @@
-def solution():
-    T = int(input())
-    for i in range(T):
-        N = int(input())
-        a, b = decompose(N)
-        print("Case #{}: {} {}".format(i + 1, a, b))
+T = int(input())
+for i in range(T):
+    N = int(input())
+    a, b = decompose(N)
+    print("Case #{}: {} {}".format(i + 1, a, b))
         
 def decompose(N):
     """
@@ -25,5 +24,3 @@ def decompose(N):
         a = a * 10 + last
         b = b * 10
     return a, b
-
-solution()
