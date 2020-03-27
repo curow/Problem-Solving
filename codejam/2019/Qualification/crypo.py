@@ -1,9 +1,22 @@
 import string
 import math
+
 def get_int():
     return int(input())
+
 def get_int_list():
     return map(int, input().split())
+
+def isqrt(n):
+    if n < 2:
+        return n
+    else:
+        small = isqrt(n >> 2) << 1
+        large = small + 1
+        if large * large > n:
+            return small
+        else:
+            return large
 
 T = get_int()
 for _ in range(1, T + 1):
@@ -12,7 +25,10 @@ for _ in range(1, T + 1):
     arr = get_int_list()
     first = next(arr)
     second = next(arr)
-    common = math.gcd(first, second)
+    if first == second:
+        common = isqrt(first)
+    else:
+        common = math.gcd(first, second)
     lst.append(first // common)
     lst.append(common)
     lst.append(second // common)
