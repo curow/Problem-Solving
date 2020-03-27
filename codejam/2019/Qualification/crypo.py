@@ -5,7 +5,7 @@ def get_int():
     return int(input())
 
 def get_int_list():
-    return map(int, input().split())
+    return list(map(int, input().split()))
 
 def isqrt(n):
     if n < 2:
@@ -20,27 +20,29 @@ def isqrt(n):
 
 T = get_int()
 for _ in range(1, T + 1):
-    lst = []
+    primes = []
     N, L = tuple(get_int_list())
-    arr = get_int_list()
-    first = next(arr)
-    second = next(arr)
-    if first == second:
-        common = isqrt(first)
-    else:
-        common = math.gcd(first, second)
-    lst.append(first // common)
-    lst.append(common)
-    lst.append(second // common)
-    for i in range(2, L):
-        num = next(arr)
-        lst.append(num // lst[-1])
-    primes = sorted(set(lst))
+    products = get_int_list()
+    primes = [0 for _ in range(L + 1)]
+    index = 0
+    for i in range(L - 1):
+        if products[i] != products[i + 1]:
+            index = i
+            break
+    common = math.gcd(products[index], products[index + 1])
+    primes[index + 1] = common
+    for i in range(index, -1, -1):
+        num = products[i]
+        primes[i] = num // primes[i + 1]
+    for i in range(index + 2, L + 1):
+        num = products[i - 1]
+        primes[i] = num // primes[i - 1]
+    sorted_primes = sorted(set(primes))
     int_to_char = {}
     for i, ch in enumerate(string.ascii_uppercase):
-        int_to_char[primes[i]] = ch
+        int_to_char[sorted_primes[i]] = ch
     result = ''
-    for num in lst:
+    for num in primes:
         result += int_to_char[num]
     print("Case #{}: {}".format(_, result))
     
