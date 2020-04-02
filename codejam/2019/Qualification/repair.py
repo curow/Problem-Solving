@@ -1,29 +1,40 @@
 import math
 
-def get_int_list():
-    return list(map(int, input().split()))
+def partition(array, start):
+    current = start
+    end = current + 1
+    while end < len(array) and array[current] < array[end]:
+        current = end
+        end += 1
+    return end
 
 T = int(input())
 for _ in range(1, T + 1):
-    N, B, F = get_int_list()
-    bits = int(math.ceil(math.log2(N)))
-    # assert bits <= F
+    N, B, F = list(map(int, input().split()))
     good = [0] * (N - B)
-    for bit in range(bits):
+    for bit in range(5):
         weight = 2**bit
         pattern = '0' * weight + '1' * weight
-        num_pattern = int(math.ceil(N / len(pattern)))
+        num_pattern = math.ceil(N / len(pattern))
         query = (pattern * num_pattern)[:N]
-        # assert len(query) == N
-        # assert all([x in '01' for x in query])
         print(query)
         val = input()
         values = [int(x) for x in val]
         for i, x in enumerate(values):
             good[i] += weight * x
-    bad = set(range(N)) - set(good)
-    bad = sorted(bad)
-    print(*bad)
+    num_partition = math.ceil(N / 32)
+    bad_lst = []
+    start = 0
+    for i in range(num_partition):
+        remain = min(N - i * 32, 32)
+        end = partition(good, start)
+        if end - start < 32:
+            bad = sorted(set(range(remain)) - set(good[start:end]))
+            bad = [x + (32 * i) for x in bad]
+            bad_lst.extend(bad)
+        start = end
+    # assert len(bad_lst) == B
+    print(*bad_lst)
     judge = int(input())
     if judge == -1:
         break
