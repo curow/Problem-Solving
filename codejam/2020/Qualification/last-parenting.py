@@ -7,7 +7,6 @@ T = int(input())
 for _ in range(1, T + 1):
     N = int(input())
     result = ''
-    done = False
     intervals = []
     Cs = []
     Js = []
@@ -27,7 +26,9 @@ for _ in range(1, T + 1):
         for interval in intervals:
             if interval in Cs:
                 result += 'C'
+                Cs.remove(interval)
             else:
                 result += 'J'
+                Js.remove(interval)
     print("Case #{}: {}".format(_, result))
 
