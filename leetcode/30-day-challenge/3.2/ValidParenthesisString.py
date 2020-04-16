@@ -21,9 +21,6 @@ class Solution:
                 if search(k + 1, debt + 1):
                     return True
                 if debt > 0 and search(k + 1, debt - 1):
-                        return True
+                    return True
                 return False
         return search(0, 0)
-
-
-
