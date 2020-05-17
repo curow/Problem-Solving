@@ -1,11 +1,12 @@
 T = int(input())
 for t in range(1, T + 1):
     R, C = [int(s) for s in input().split(" ")]
+    path = ""
     matrix = []
     for i in range(R):
         matrix.append([x for x in input()])
     dependency = {}
-    for i in range(0, R):
+    for i in reversed(range(0, R)):
         current_row = matrix[i]
         if i + 1 < R:
             depend_row = matrix[i + 1]
@@ -15,11 +16,10 @@ for t in range(1, T + 1):
             current = current_row[j]
             depend = depend_row[j]
             if current not in dependency:
-                dependency[current] = set(current)
+                dependency[current] = set()
             dependency[current].add(depend)
     dependency = list(dependency.items())
     dependency.sort(key=lambda x: len(x[1]))
-    path = ""
     while dependency:
         first_value = dependency[0][0]
         first_depend = dependency[0][1]
