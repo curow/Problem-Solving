@@ -2,28 +2,34 @@ class Solution {
 public:
     unordered_set<string> ss;
 
-    int balance(string s) {
+    bool balance(string s) {
         int res = 0;
         for (char c : s) {
-            if (c == '(') ++res;
-            else --res;
+            if (c == '(') --res;
+            else ++res;
+            if (res > 0) return false;
         }
+        return res == 0;
     }
 
-    void generateAll(string build, int remain) {
-        if (balance(build) > 0) return;
-        if (remain == 0) {
-            if (balance(build) == 0) {
+
+    void generateAll(string build, int open, int close, int max) {
+        if (open == close && open == max) {
+            if (balance(build)) {
                 ss.insert(build);
             }
             return;
         }
-        generateAll(build + "(", remain - 1);
-        generateAll(build + ")", remain - 1);
+        if (open < max) {
+            generateAll(build + "(", open + 1, close, max);
+        }
+        if (close < open) {
+            generateAll(build + ")", open, close + 1, max);
+        }
     }
 
     vector<string> generateParenthesis(int n) {
-        generateAll("", n * 2);
+        generateAll("", 0, 0, n);
         return vector<string>(ss.begin(), ss.end());
     }
 };
