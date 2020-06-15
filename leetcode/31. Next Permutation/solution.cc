@@ -14,7 +14,7 @@ public:
                 else j = mid - 1;
             }
             swap(nums[i], nums[l - 1]);
-            sort(nums.begin() + l, nums.end());
+            reverse(nums.begin() + l, nums.end());
         }
     }
 };
