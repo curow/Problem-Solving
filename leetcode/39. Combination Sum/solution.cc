@@ -1,26 +1,28 @@
 class Solution {
 public:
+    vector<int> candidates;
     vector<vector<int>> output;
+    vector<int> path;
 
-    void dfs(vector<int> candidates, vector<int> build, int target) {
+    void dfs(int target, int start) {
         if (target == 0) {
-            output.push_back(build);
-            return;
-        } else if (candidates.empty()) {
+            output.push_back(path);
             return;
         }
-        int x = candidates.back();
-        if (x <= target) {
-            build.push_back(x);
-            dfs(candidates, build, target - x);
-            build.pop_back();
+        if (start < size(candidates)) {
+            int x = candidates[start];
+            if (x > target) return;
+            dfs(target, start + 1);
+            path.push_back(x);
+            dfs(target - x, start);
+            path.pop_back();
         }
-        candidates.pop_back();
-        dfs(candidates, build, target);
     }
 
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
-        dfs(candidates, {}, target);
+        sort(candidates.begin(), candidates.end());
+        this->candidates = candidates;
+        dfs(target, 0);
         return output;
     }
 };
