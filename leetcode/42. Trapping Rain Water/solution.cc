@@ -3,7 +3,6 @@ public:
     int trap(vector<int>& height) {
         int n = size(height);
         int total = 0;
-        int i = 0;
         for (int i = 0; i + 1 < n; ++i) {
             if (height[i] == 0) continue;
             int rain = 0;
