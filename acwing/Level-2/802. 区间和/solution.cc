@@ -10,60 +10,56 @@ typedef pair<int, int> PII;
 int main() {
     int n, m;
     cin >> n >> m;
+    vector<PII> adds(n), query(m);
+    vector<int> all;
 
-    vector<int> nums(n);
-    vector<PII> add(n);
     for (int i = 0; i < n; ++i) {
         int x, c;
         cin >> x >> c;
-        nums[i] = x;
-        add[i] = {x, c};
+        adds[i] = {x, c};
+        all.push_back(x);
     }
 
-    sort(nums.begin(), nums.end());
-    nums.erase(unique(nums.begin(), nums.end()), nums.end());
-    
-    /* for (int x : nums) cout << x << ' '; */
-    /* cout << endl; */
+    for (int i = 0; i < m; ++i) {
+        int l, r;
+        cin >> l >> r;
+        query[i] = {l, r};
+        all.push_back(l);
+        all.push_back(r);
+    }
 
-    auto find = [&](int target) {
-        int l = 0, r = size(nums) - 1;
+    sort(all.begin(), all.end());
+    all.erase(unique(all.begin(), all.end()), all.end());
+
+    auto find = [&](int x) {
+        int l = 0, r = size(all) - 1;
         while (l < r) {
             int mid = (l + r) >> 1;
-            if (nums[mid] >= target) r = mid;
+            if (all[mid] >= x) r = mid;
             else l = mid + 1;
         }
-        return l;
+        return l + 1;
     };
-
-    vector<int> val(size(nums), 0);
-    for (auto const [x, c] : add) {
+    
+    vector<int> val(size(all) + 1, 0);
+    for (int i = 0; i < n; ++i) {
+        int x, c;
+        x = adds[i].first;
+        c = adds[i].second;
         int idx = find(x);
         val[idx] += c;
     }
-    
-    /* for (int x : val) cout << x << " "; */
-    /* cout << endl; */
 
     for (int i = 1; i < size(val); ++i) val[i] += val[i - 1];
 
-    /* for (int x : val) cout << x << " "; */
-    /* cout << endl; */
-
-    while (m--) {
+    for (int i = 0; i < m; ++i) {
         int l, r;
-        cin >> l >> r;
-        int left = find(l), right = find(r);
-        if (nums[left] > l) ++left;
-        /* cout << l << " " << r << endl; */
-        /* cout << left << " " << right << endl; */
-        if (left > right) {
-            cout << 0 << endl;
-            continue;
-        }
-        if (left == 0) cout << val[right] << endl;
-        else cout << val[right] - val[left - 1] << endl;
+        l = query[i].first;
+        r = query[i].second;
+        int kl = find(l);
+        int kr = find(r);
+        cout << val[kr] - val[kl - 1] << endl;
     }
+
     return 0;
 }
-
