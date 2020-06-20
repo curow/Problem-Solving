@@ -21,12 +21,8 @@ int main() {
 
     int cnt = 0, front = INT_MIN;
     for (auto &[l, r] : pairs) {
-        if (front < l) {
-            ++cnt;
-            front = r;
-        } else {
-            front = max(front, r);
-        }
+        if (front < l) ++cnt;
+        front = max(front ,r);
     }
     cout << cnt << endl;
 
