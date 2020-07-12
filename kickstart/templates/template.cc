@@ -1,11 +1,12 @@
 #include <iostream>
 using namespace std;
 int main() {
-	int t, n, m;
+	int t;
 	cin >> t;
 	for (int i = 1; i <= t; ++i) {
+        int n, m;
 		cin >> n >> m;
-		cout << "Case #" << i << ": " << (n + m) << " " << (n * m) << endl;
+		cout << "Case #" << i << ": " << endl;
 	}
 	return 0;
 }

@@ -4,34 +4,34 @@
 using namespace std;
 
 int main() {
-	int t;
-	cin >> t;
-	for (int i = 1; i <= t; ++i) {
+	int T;
+	cin >> T;
+	for (int t = 1; t <= T; ++t) {
         int n, k;
 		cin >> n >> k;
         vector<int> A(n);
-        for (int j = 0; j < n; ++j) cin >> A[j];
+        for (int i = 0; i < n; ++i) cin >> A[i];
 
-        int cnt = 0, index = 0, cur = k;
-        while (index < n) {
-            if (cur == 0) {
+        int i = 0, j, cnt = 0;
+        while (i <= n - k) {
+            while (i <= n - k && A[i] != k) ++i;
+            if (i > n - k) {
+                break;
+            }
+
+            j = i;
+            for (int z = k; z > 0; --z) {
+                if (A[j] == z) ++j;
+                else break;
+            }
+            if (j - i == k) {
                 ++cnt;
-                cur = k;
-            }
-
-            if (A[index] == cur) {
-                --cur;
-            } else if (A[index] == k){
-                cur = k - 1;
+                i = j;
             } else {
-                cur = k;
+                ++i;
             }
-
-            ++index;
         }
-        if (cur == 0) ++cnt;
-
-		cout << "Case #" << i << ": " << cnt << endl;
+		cout << "Case #" << t << ": " << cnt << endl;
 	}
 	return 0;
 }
