@@ -1,30 +1,22 @@
-from functools import lru_cache
-
 T = int(input())
 for t in range(1, T + 1):
     k = int(input())
     v = [int(s) for s in input().split(" ")]
 
-    @lru_cache(maxsize=None)
-    def dfs(start_idx, start_symbol, num_breaking):
-        if start_idx >= len(v) - 1:
-            return num_breaking
+    dp = [[float('inf') for _ in range(4)] for _ in range(k)]
 
-        if v[start_idx + 1] > v[start_idx]:
-            decending = False
-            start_symbol += 1
-        elif v[start_idx + 1] < v[start_idx]:
-            decending = True
-            start_symbol -= 1
+    dp[0] = [0 for _ in range(4)]
+    for i in range(1, k):
+        if v[i] > v[i - 1]:
+            dp[i][0] = min(dp[i - 1][x] for x in range(4)) + 1
+            for j in range(1, 4):
+                dp[i][j] = min(dp[i - 1][x] for x in range(j))
+        elif v[i] < v[i - 1]:
+            dp[i][3] = min(dp[i - 1][x] for x in range(4)) + 1
+            for j in range(3):
+                dp[i][j] = min(dp[i - 1][x] for x in range(j + 1, 4))
         else:
-            return dfs(start_idx + 1, start_symbol, num_breaking)
+            for j in range(4):
+                dp[i][j] = dp[i - 1][j]
 
-        if start_symbol > 3 or start_symbol < 0:
-            return min(dfs(start_idx + 1, x, num_breaking + 1) for x in range(4))
-        else:
-            if decending:
-                return min(dfs(start_idx + 1, x, num_breaking) for x in range(0, start_symbol + 1))
-            else:
-                return min(dfs(start_idx + 1, x, num_breaking) for x in range(start_symbol, 4))
-
-    print("Case #{}: {}".format(t, min(dfs(0, x, 0) for x in range(4))))
+    print("Case #{}: {}".format(t, min(dp[k - 1][x] for x in range(4))))
