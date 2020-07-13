@@ -15,25 +15,31 @@ for t in range(1, T + 1):
         else:
             children[p].append(child)
 
+    def dfs(visit_count, num_skip):
+        path_taken = []
+        visited = [False for _ in range(n)]
+        stack = []
+        stack.append(0)
+        while stack:
+            idx = stack[-1]
+            if not visited[idx]:
+                path_taken.append(idx)
+                # dfs deeper if idx has children
+                if idx in children:
+                    for x in children[idx]:
+                        stack.append(x)
+                visited[idx] = True
+            else:
+                stack.pop()
+                path_taken.pop()
+                visit_count[idx] += 1
+                if len(path_taken) >= num_skip:
+                    prev = path_taken[-num_skip]
+                    visit_count[prev] += visit_count[idx]
 
     def visit_possibility(num_skip):
-        path_taken = []
-        def dfs(idx, visit_count, num_skip):
-            # dfs deeper if idx has children
-            if idx in children:
-                path_taken.append(idx)
-                for x in children[idx]:
-                    dfs(x, visit_count, num_skip)
-                path_taken.pop()
-
-            visit_count[idx] += 1
-
-            if len(path_taken) >= num_skip:
-                prev = path_taken[-num_skip]
-                visit_count[prev] += visit_count[idx]
-
         visit_count = [0 for _ in range(n)]
-        dfs(0, visit_count, num_skip)
+        dfs(visit_count, num_skip)
         return [visit_count[i] / n for i in range(n)]
 
     pa = visit_possibility(a)
