@@ -1,12 +1,15 @@
 #include <iostream>
+
 using namespace std;
+
 int main() {
-	int t;
-	cin >> t;
-	for (int i = 1; i <= t; ++i) {
-        int n, m;
-		cin >> n >> m;
-		cout << "Case #" << i << ": " << endl;
+	int T;
+	cin >> T;
+	for (int t = 1; t <= T; ++t) {
+        int n;
+		cin >> n;
+
+		cout << "Case #" << t << ": " << endl;
 	}
 	return 0;
 }
