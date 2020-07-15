@@ -10,7 +10,7 @@ int main() {
     // and the number of each class is at most 2000
     // so we know if we use binary optimization, the total number of object
     // is at most ceil(1000 * log(2001))
-    /* const int N = ceil(2000 * log(2001)); */
+    /* const int N = ceil(1000 * (log(2001) + 1)); */
 
     int count, c;
     cin >> count >> c;
