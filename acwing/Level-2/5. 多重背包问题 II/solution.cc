@@ -34,17 +34,14 @@ int main() {
         }
     }
 
-    vector<vector<int>> dp(n + 1, vector<int>(c + 1, 0));
+    vector<int> dp(c + 1, 0);
     for (int i = 1; i <= n; ++i) {
-        for (int j = 1; j <= c; ++j) {
-            dp[i][j] = dp[i - 1][j];
-            if (j >= w[i]) {
-                dp[i][j] = max(dp[i][j], dp[i - 1][j - w[i]] + v[i]);
-            }
+        for (int j = c; j >= w[i]; --j) {
+            dp[j] = max(dp[j], dp[j - w[i]] + v[i]);
         }
     }
 
-    cout << dp[n][c] << endl;
+    cout << dp[c] << endl;
 
     return 0;
 }
