@@ -12,8 +12,8 @@ int main() {
         if (l > r) return -1;
         while (l < r) {
             int mid = (l + r) / 2;
-            if (tails[mid] < x) l = mid + 1;
-            else r = mid;
+            if (tails[mid] >= x) r = mid;
+            else l = mid + 1;
         }
         if (tails[l] >= x) return l;
         else return -1;
