@@ -1,27 +1,22 @@
 class Solution {
 public:
     int numDecodings(string s) {
-        int n = s.size();
-        vector<int> f(n);
-        if (s[0] == '0') {
-            return 0;
-        } else {
-            f[0] = 1;
-        }
+        const int n = s.size();
+        if (s[0] == '0') return 0;
+        int pre = 1, cur = 1;
         for (int i = 1; i < n; ++i) {
+            int tmp = cur;
             if (s[i] == '0') {
                 if (s[i - 1] == '1' || s[i - 1] == '2') {
-                    f[i] = i >= 2 ? f[i - 2] : 1;
+                    cur = pre;
                 } else {
                     return 0;
                 }
-            } else {
-                f[i] = f[i - 1];
-                if (s[i - 1] == '1' || (s[i - 1] == '2' && s[i] <= '6')) {
-                    f[i] += i >= 2 ? f[i - 2] : 1;
-                }
+            } else if (s[i - 1] == '1' || (s[i - 1] == '2' && s[i] <= '6')) {
+                    cur += pre;
             }
+            pre = tmp;
         }
-        return f[n - 1];
+        return cur;
     }
 };
