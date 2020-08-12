@@ -3,26 +3,29 @@
 using namespace std;
 
 int main() {
-    string source;
-    cin >> source;
-    size_t n = source.size();
-    set<string> res;
-    function<void(string, string)> search;
-    search = [&](string build, string remain) {
-        if (build.size() == n) {
-            res.insert(build);
+    string s;
+    cin >> s;
+    size_t n = s.size();
+    unordered_set<string> results;
+    vector<bool> chosen(n, false);
+    string permutation;
+    function<void()> search;
+    search = [&]() {
+        if (permutation.size() == n) {
+            results.insert(permutation);
         } else {
-            for (size_t i = 0; i < remain.size(); ++i) {
-                string next_remain = remain;
-                next_remain.erase(i, 1);
-                search(build + remain[i], next_remain);
+            for (size_t i = 0; i < n; ++i) {
+                if (chosen[i]) continue;
+                chosen[i] = true;
+                permutation.push_back(s[i]);
+                search();
+                permutation.pop_back();
+                chosen[i] = false;
             }
         }
     };
-    search("", source);
-    cout << res.size() << endl;
-    for (string s : res) {
-        cout << s << endl;
-    }
+    search();
+    cout << results.size() << endl;
+    for (auto x : results) cout << x << endl;
     return 0;
 }
