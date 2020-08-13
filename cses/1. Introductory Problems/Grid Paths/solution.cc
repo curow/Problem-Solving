@@ -3,6 +3,7 @@
 using namespace std;
 
 int main() {
+    /* auto start = chrono::steady_clock::now(); */
     const int n = 7;
     string code;
     cin >> code;
@@ -24,6 +25,7 @@ int main() {
         } else {
             bool up = free[y - 1][x], down = free[y + 1][x];
             bool left = free[y][x - 1], right = free[y][x + 1];
+            if (!up && !down && !left && !right) return;
             if (up && down && !left && !right) return;
             if (left && right && !up && !down) return;
             if (code[p] == '?') {
@@ -37,7 +39,7 @@ int main() {
                         free[ny][nx] = true;
                     }
                 }
-            } else if (go.count(code[p])){
+            } else {
                 int dy, dx;
                 tie(dy, dx) = go[code[p]];
                 int ny = y + dy, nx = x + dx;
@@ -46,13 +48,15 @@ int main() {
                     search(ny, nx, p + 1);
                     free[ny][nx] = true;
                 }
-            } else {
-                throw "Unsupported instruction!";
-            }
+            }        
         }
     };
     free[1][1] = false;
     search(1, 1, 2);
     cout << count << endl;
+    /* auto end = chrono::steady_clock::now(); */
+    /* cout << "\nElapsed time in milliseconds : " */
+    /*      << chrono::duration_cast<chrono::milliseconds>(end - start).count() */
+    /*      << " ms\n"; */
     return 0;
 }
