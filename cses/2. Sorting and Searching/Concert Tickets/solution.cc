@@ -5,8 +5,7 @@ using namespace std;
 int main() {
     int n, m;
     cin >> n >> m;
-    multiset<int> prices;
-    vector<int> tol(m);
+    multiset<int, greater<int>> prices;
     for (int i = 0; i < n; ++i) {
         int x;
         cin >> x;
@@ -16,25 +15,11 @@ int main() {
         int tol;
         cin >> tol;
         auto it = prices.lower_bound(tol);
-        if (it == prices.end()) {
-            if (!prices.empty()) {
-                --it;
-                cout << *it << endl;
-                prices.erase(it);
-            } else {
-                cout << -1 << endl;
-            }
-        } else if (it == prices.begin()){
-            if (*it == tol) {
-                cout << tol << endl;
-                prices.erase(it);
-            } else {
-                cout << -1 << endl;
-            }
-        } else {
-            if (*it != tol) --it;
+        if (it != prices.end()) {
             cout << *it << endl;
             prices.erase(it);
+        } else {
+            cout << -1 << endl;
         }
     }
     return 0;
