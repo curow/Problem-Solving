@@ -2,6 +2,8 @@
 
 using namespace std;
 
+#define int long long int
+
 int main() {
     #ifdef TIMING 
     auto start = chrono::steady_clock::now();
