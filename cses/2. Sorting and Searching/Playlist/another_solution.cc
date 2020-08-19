@@ -14,7 +14,7 @@ __int32_t main() {
     int n;
     cin >> n;
     map<int, int> loc;
-    int best = 0, i = 0;
+    int best = 0, i = 1;
     for (int j = 1; j <= n; ++j) {
         int x;
         cin >> x;
