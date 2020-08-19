@@ -6,9 +6,14 @@ const int N = 2e5 + 10;
 int val[N];
 
 int main() {
+
+    #ifdef TIMING 
+    auto start = chrono::steady_clock::now();
+    #endif
+
     int n;
-    cin >> n;
-    for (int i = 0; i < n; ++i) cin >> val[i];
+    scanf("%d", &n);
+    for (int i = 0; i < n; ++i) scanf("%d", val + i);
     int s = 0, e = 0, best = 1;
     unordered_map<int, int> loc;
     loc[val[0]] = 0;
@@ -22,6 +27,14 @@ int main() {
         }
         loc[x] = i;
     }
-    cout << best << endl;
+    printf("%d\n", best);
+
+    #ifdef TIMING 
+    auto end = chrono::steady_clock::now();
+    cout << "\nElapsed time in milliseconds : "
+         << chrono::duration_cast<chrono::milliseconds>(end - start).count()
+         << " ms\n";
+    #endif
+
     return 0;
 }
