@@ -13,7 +13,7 @@ int main() {
     int n;
     cin >> n;
     int s = 0, e = 0, best = 1;
-    unordered_map<int, int> loc;
+    unordered_map<int, int> loc(1 << 20);
     int x;
     cin >> x;
     loc[x] = 0;
