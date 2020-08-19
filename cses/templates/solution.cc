@@ -2,7 +2,7 @@
 
 using namespace std;
 
-#define int long long int
+#define int __int64_t
 
 __int32_t main() {
     #ifdef TIMING 
