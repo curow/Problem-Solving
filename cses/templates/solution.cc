@@ -9,6 +9,7 @@ int main() {
     auto start = chrono::steady_clock::now();
     #endif
     cin.sync_with_stdio(false);
+    cin.tie(NULL);cout.tie(NULL);
 
     // solve the problem
 
