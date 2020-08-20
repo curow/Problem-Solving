@@ -1,8 +1,8 @@
 #include <bits/stdc++.h>
 
-using namespace std;
+#define int __int64_t
 
-typedef __int64_t int;
+using namespace std;
 
 __int32_t main() {
     #ifdef TIMING 
