@@ -2,7 +2,7 @@
 
 using namespace std;
 
-#define int __int64_t
+typedef __int64_t int;
 
 __int32_t main() {
     #ifdef TIMING 
