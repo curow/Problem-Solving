@@ -1,7 +1,5 @@
 #include <bits/stdc++.h>
-
 #define int __int64_t
-
 using namespace std;
 
 __int32_t main() {
