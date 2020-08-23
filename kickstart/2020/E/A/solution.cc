@@ -15,8 +15,15 @@ __int32_t main() {
 	for (int t = 1; t <= T; ++t) {
         int n;
 		cin >> n;
-
-		cout << "Case #" << t << ": " << endl;
+        vector<int> a(n);
+        for (auto &x : a) cin >> x;
+        int i = 0, j = 2, best = 2;
+        while (j < n) {
+            if (a[j] - a[j - 1] == a[j - 1] - a[j - 2]) ++j;
+            else i = j - 1, j = i + 2;
+            best = max(best, j - i);
+        }
+		cout << "Case #" << t << ": " << best << endl;
 	}
 
     #ifdef TIMING 
