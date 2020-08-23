@@ -1,0 +1,210 @@
+n = 1 a = 1 b = 1 c = 1
+Case #1: 1
+n = 2 a = 1 b = 1 c = 1
+Case #2: IMPOSSIBLE
+n = 2 a = 1 b = 2 c = 1
+Case #3: 2 1
+n = 2 a = 1 b = 2 c = 1
+Case #4: 1 2
+n = 2 a = 2 b = 2 c = 1
+Case #5: IMPOSSIBLE
+n = 2 a = 2 b = 2 c = 2
+Case #6: 2 2
+n = 3 a = 1 b = 1 c = 1
+Case #7: IMPOSSIBLE
+n = 3 a = 1 b = 2 c = 1
+Case #8: 3 1 2
+n = 3 a = 1 b = 3 c = 1
+Case #9: 3 2 2
+n = 3 a = 1 b = 2 c = 1
+Case #10: 2 1 3
+n = 3 a = 2 b = 2 c = 1
+Case #11: 2 3 2
+n = 3 a = 2 b = 3 c = 1
+Case #12: IMPOSSIBLE
+n = 3 a = 1 b = 3 c = 1
+Case #13: 2 2 3
+n = 3 a = 2 b = 3 c = 1
+Case #14: IMPOSSIBLE
+n = 3 a = 3 b = 3 c = 1
+Case #15: IMPOSSIBLE
+n = 3 a = 2 b = 2 c = 2
+Case #16: 3 1 3
+n = 3 a = 2 b = 3 c = 2
+Case #17: 3 3 2
+n = 3 a = 2 b = 3 c = 2
+Case #18: 2 3 3
+n = 3 a = 3 b = 3 c = 2
+Case #19: IMPOSSIBLE
+n = 3 a = 3 b = 3 c = 3
+Case #20: 3 3 3
+n = 4 a = 1 b = 1 c = 1
+Case #21: IMPOSSIBLE
+n = 4 a = 1 b = 2 c = 1
+Case #22: 4 1 1 3
+n = 4 a = 1 b = 3 c = 1
+Case #23: 4 1 3 3
+n = 4 a = 1 b = 4 c = 1
+Case #24: 4 3 3 3
+n = 4 a = 1 b = 2 c = 1
+Case #25: 3 1 1 4
+n = 4 a = 2 b = 2 c = 1
+Case #26: 3 4 1 3
+n = 4 a = 2 b = 3 c = 1
+Case #27: 3 4 3 3
+n = 4 a = 2 b = 4 c = 1
+Case #28: IMPOSSIBLE
+n = 4 a = 1 b = 3 c = 1
+Case #29: 3 3 1 4
+n = 4 a = 2 b = 3 c = 1
+Case #30: 3 3 4 3
+n = 4 a = 3 b = 3 c = 1
+Case #31: IMPOSSIBLE
+n = 4 a = 3 b = 4 c = 1
+Case #32: IMPOSSIBLE
+n = 4 a = 1 b = 4 c = 1
+Case #33: 3 3 3 4
+n = 4 a = 2 b = 4 c = 1
+Case #34: IMPOSSIBLE
+n = 4 a = 3 b = 4 c = 1
+Case #35: IMPOSSIBLE
+n = 4 a = 4 b = 4 c = 1
+Case #36: IMPOSSIBLE
+n = 4 a = 2 b = 2 c = 2
+Case #37: 4 1 1 4
+n = 4 a = 2 b = 3 c = 2
+Case #38: 4 1 4 3
+n = 4 a = 2 b = 4 c = 2
+Case #39: 4 4 3 3
+n = 4 a = 2 b = 3 c = 2
+Case #40: 3 4 1 4
+n = 4 a = 3 b = 3 c = 2
+Case #41: 3 4 4 3
+n = 4 a = 3 b = 4 c = 2
+Case #42: IMPOSSIBLE
+n = 4 a = 2 b = 4 c = 2
+Case #43: 3 3 4 4
+n = 4 a = 3 b = 4 c = 2
+Case #44: IMPOSSIBLE
+n = 4 a = 4 b = 4 c = 2
+Case #45: IMPOSSIBLE
+n = 4 a = 3 b = 3 c = 3
+Case #46: 4 1 4 4
+n = 4 a = 3 b = 4 c = 3
+Case #47: 4 4 4 3
+n = 4 a = 3 b = 4 c = 3
+Case #48: 3 4 4 4
+n = 4 a = 4 b = 4 c = 3
+Case #49: IMPOSSIBLE
+n = 4 a = 4 b = 4 c = 4
+Case #50: 4 4 4 4
+n = 5 a = 1 b = 1 c = 1
+Case #51: IMPOSSIBLE
+n = 5 a = 1 b = 2 c = 1
+Case #52: 5 1 1 1 4
+n = 5 a = 1 b = 3 c = 1
+Case #53: 5 1 1 4 4
+n = 5 a = 1 b = 4 c = 1
+Case #54: 5 1 4 4 4
+n = 5 a = 1 b = 5 c = 1
+Case #55: 5 4 4 4 4
+n = 5 a = 1 b = 2 c = 1
+Case #56: 4 1 1 1 5
+n = 5 a = 2 b = 2 c = 1
+Case #57: 4 5 1 1 4
+n = 5 a = 2 b = 3 c = 1
+Case #58: 4 5 1 4 4
+n = 5 a = 2 b = 4 c = 1
+Case #59: 4 5 4 4 4
+n = 5 a = 2 b = 5 c = 1
+Case #60: IMPOSSIBLE
+n = 5 a = 1 b = 3 c = 1
+Case #61: 4 4 1 1 5
+n = 5 a = 2 b = 3 c = 1
+Case #62: 4 4 1 5 4
+n = 5 a = 3 b = 3 c = 1
+Case #63: 4 4 5 4 4
+n = 5 a = 3 b = 4 c = 1
+Case #64: IMPOSSIBLE
+n = 5 a = 3 b = 5 c = 1
+Case #65: IMPOSSIBLE
+n = 5 a = 1 b = 4 c = 1
+Case #66: 4 4 4 1 5
+n = 5 a = 2 b = 4 c = 1
+Case #67: 4 4 4 5 4
+n = 5 a = 3 b = 4 c = 1
+Case #68: IMPOSSIBLE
+n = 5 a = 4 b = 4 c = 1
+Case #69: IMPOSSIBLE
+n = 5 a = 4 b = 5 c = 1
+Case #70: IMPOSSIBLE
+n = 5 a = 1 b = 5 c = 1
+Case #71: 4 4 4 4 5
+n = 5 a = 2 b = 5 c = 1
+Case #72: IMPOSSIBLE
+n = 5 a = 3 b = 5 c = 1
+Case #73: IMPOSSIBLE
+n = 5 a = 4 b = 5 c = 1
+Case #74: IMPOSSIBLE
+n = 5 a = 5 b = 5 c = 1
+Case #75: IMPOSSIBLE
+n = 5 a = 2 b = 2 c = 2
+Case #76: 5 1 1 1 5
+n = 5 a = 2 b = 3 c = 2
+Case #77: 5 1 1 5 4
+n = 5 a = 2 b = 4 c = 2
+Case #78: 5 1 5 4 4
+n = 5 a = 2 b = 5 c = 2
+Case #79: 5 5 4 4 4
+n = 5 a = 2 b = 3 c = 2
+Case #80: 4 5 1 1 5
+n = 5 a = 3 b = 3 c = 2
+Case #81: 4 5 1 5 4
+n = 5 a = 3 b = 4 c = 2
+Case #82: 4 5 5 4 4
+n = 5 a = 3 b = 5 c = 2
+Case #83: IMPOSSIBLE
+n = 5 a = 2 b = 4 c = 2
+Case #84: 4 4 5 1 5
+n = 5 a = 3 b = 4 c = 2
+Case #85: 4 4 5 5 4
+n = 5 a = 4 b = 4 c = 2
+Case #86: IMPOSSIBLE
+n = 5 a = 4 b = 5 c = 2
+Case #87: IMPOSSIBLE
+n = 5 a = 2 b = 5 c = 2
+Case #88: 4 4 4 5 5
+n = 5 a = 3 b = 5 c = 2
+Case #89: IMPOSSIBLE
+n = 5 a = 4 b = 5 c = 2
+Case #90: IMPOSSIBLE
+n = 5 a = 5 b = 5 c = 2
+Case #91: IMPOSSIBLE
+n = 5 a = 3 b = 3 c = 3
+Case #92: 5 1 1 5 5
+n = 5 a = 3 b = 4 c = 3
+Case #93: 5 1 5 5 4
+n = 5 a = 3 b = 5 c = 3
+Case #94: 5 5 5 4 4
+n = 5 a = 3 b = 4 c = 3
+Case #95: 4 5 5 1 5
+n = 5 a = 4 b = 4 c = 3
+Case #96: 4 5 5 5 4
+n = 5 a = 4 b = 5 c = 3
+Case #97: IMPOSSIBLE
+n = 5 a = 3 b = 5 c = 3
+Case #98: 4 4 5 5 5
+n = 5 a = 4 b = 5 c = 3
+Case #99: IMPOSSIBLE
+n = 5 a = 5 b = 5 c = 3
+Case #100: IMPOSSIBLE
+n = 5 a = 4 b = 4 c = 4
+Case #101: 5 1 5 5 5
+n = 5 a = 4 b = 5 c = 4
+Case #102: 5 5 5 5 4
+n = 5 a = 4 b = 5 c = 4
+Case #103: 4 5 5 5 5
+n = 5 a = 5 b = 5 c = 4
+Case #104: IMPOSSIBLE
+n = 5 a = 5 b = 5 c = 5
+Case #105: 5 5 5 5 5

@@ -15,6 +15,11 @@ __int32_t main() {
 	for (int t = 1; t <= T; ++t) {
         int n, a, b, c;
 		cin >> n >> a >> b >> c;
+        bool swaped = false;
+        if (a > b) {
+            swap(a, b);
+            swaped = true;
+        }
         /* cout << "n = " << n << " a = " << a << " b = " << b << " c = " << c << endl; */
         int minimum = a + b - c;
         vector<int> buildings;
@@ -86,11 +91,21 @@ __int32_t main() {
             continue;
         } else {
             cout << "Case #" << t << ": ";
-            for (int i = 0; i < n; ++i) {
-                if (i == n - 1) {
-                    cout << buildings[i] << endl;
-                } else {
-                    cout << buildings[i] << " ";
+            if (swaped) {
+                for (int i = n - 1; i >= 0; --i) {
+                    if (i == 0) {
+                        cout << buildings[i] << endl;
+                    } else {
+                        cout << buildings[i] << " ";
+                    }
+                }
+            } else {
+                for (int i = 0; i < n; ++i) {
+                    if (i == n - 1) {
+                        cout << buildings[i] << endl;
+                    } else {
+                        cout << buildings[i] << " ";
+                    }
                 }
             }
         }

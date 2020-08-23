@@ -59,6 +59,7 @@ __int32_t main() {
 	cin >> T;
 	for (int t = 1; t <= T; ++t) {
 		cin >> n >> a >> b >> c;
+        cout << "n = " << n << " a = " << a << " b = " << b << " c = " << c << endl;
 		cout << "Case #" << t << ": ";
         if (search(0)) {
             continue;
