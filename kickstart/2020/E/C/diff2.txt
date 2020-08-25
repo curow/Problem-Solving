@@ -1,0 +1,4 @@
+1002c1002
+< Elapsed time in milliseconds : 6 ms
+---
+> Elapsed time in milliseconds : 5 ms

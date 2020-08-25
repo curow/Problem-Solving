@@ -4,26 +4,27 @@ using namespace std;
 
 const int N = 1e5 + 10, INF = 1e18;
 int n;
-int e[N], r[N], v[N];
+int e[N], r[N];
 vector<int> subset;
 vector<pair<int, int>> solution;
 bool search(int k) {
     if (k == n) {
         if (subset.empty()) return false;
         int m = subset.size();
+        int s = 0;
         for (int i = 0; i < m; ++i) {
-            v[subset[i]] = -INF;
+            s += e[subset[i]];
         }
-        int time = 0, i = 0;
-        while (i < 2 * m && time - v[subset[i % m]] >= r[subset[i % m]]) {
-            time += e[subset[i % m]];
-            v[subset[i % m]] = time;
-            i += 1;
+        int time = s, i = 0;
+        while (i <= m) {
+            if (s - e[subset[i % m]] >= r[subset[i % m]]) time += e[subset[i % m]];
+            else break;
+            ++i;
         }
-        if (i == 2 * n) {
+        if (i == n + 1) {
             solution.push_back({INF, n});
             return true;
-        } else if (i == 2 * m) {
+        } else if (i == m + 1) {
             solution.push_back({INF, m});
             return false;
         } else {
@@ -54,8 +55,13 @@ __int32_t main() {
         for (int i = 0; i < n; ++i) {
             cin >> e[i] >> r[i];
         }
+        subset.clear();
         solution.clear();
-        search(0);
+        bool ok = search(0);
+        if (ok) {
+            cout << "Case #" << t << ": " << 0 << " " << "INDEFINITELY" << endl;
+            continue;
+        }
         sort(solution.begin(), solution.end(), [](const auto &a, const auto &b) {
             if (a.first > b.first) {
                 return true;

@@ -3,13 +3,13 @@
 using namespace std;
 
 const int N = 1e5 + 10, INF = 1e18;
-int n;
-int e[N], r[N], v[N];
+vector<int> e(N), r(N), v(N);
 vector<int> subset;
 vector<pair<int, int>> solution;
-bool search(int k) {
+int n;
+void search(int k) {
     if (k == n) {
-        if (subset.empty()) return false;
+        if (subset.empty()) return;
         int m = subset.size();
         for (int i = 0; i < m; ++i) {
             v[subset[i]] = -INF;
@@ -20,22 +20,13 @@ bool search(int k) {
             v[subset[i % m]] = time;
             i += 1;
         }
-        if (i == 2 * n) {
-            solution.push_back({INF, n});
-            return true;
-        } else if (i == 2 * m) {
-            solution.push_back({INF, m});
-            return false;
-        } else {
-            solution.push_back({time, m});
-            return false;
-        }
+        if (i == 2 * m) solution.push_back({INF, m});
+        else solution.push_back({time, m});
     } else {
         subset.push_back(k);
-        bool ok = search(k + 1);
-        subset.pop_back();
-        if (!ok) return search(k + 1);
-        else return true;
+        search(k + 1);
+       subset.pop_back();
+        search(k + 1);
     }
 }
 
@@ -86,3 +77,4 @@ __int32_t main() {
     #endif
     return 0;
 }
+ 
