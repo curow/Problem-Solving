@@ -1,5 +1,5 @@
 from random import randrange
-T = 1000
+T = int(1e6)
 N = 12
 MAX = int(1e9)
 x = lambda : randrange(1, MAX + 1)

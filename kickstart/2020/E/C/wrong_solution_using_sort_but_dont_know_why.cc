@@ -3,9 +3,10 @@
 using namespace std;
 
 const int N = 1e5 + 10, INF = 1e18;
-int n, best_time, best_remain;
+int n;
 int e[N], r[N];
 vector<int> subset;
+vector<pair<int, int>> solution;
 bool search(int k) {
     if (k == n) {
         if (subset.empty()) return false;
@@ -20,25 +21,14 @@ bool search(int k) {
             else break;
         }
         if (i == n) {
-            best_time = INF;
-            best_remain = n;
+            solution.push_back({INF, n});
             return true;
         } else if (i == m) {
-            if (best_time == INF) {
-                best_remain = max(best_remain, m);
-            } else {
-                best_time = INF;
-                best_remain = m;
-            }
+            solution.push_back({INF, m});
             return false;
         } else {
-            if (time > best_time) {
-                best_time = time;
-                best_remain = m;
-            } else if (time == best_time) {
-                best_remain = max(best_remain, m);
-            }
-            return false;
+           solution.push_back({time, m});
+           return false;
         }
     } else {
         subset.push_back(k);
@@ -65,13 +55,31 @@ __int32_t main() {
             cin >> e[i] >> r[i];
         }
         subset.clear();
-        best_time = 0, best_remain = 0;
-        search(0);
-		cout << "Case #" << t << ": " << n - best_remain << " ";
-        if (best_time == INF) {
+        solution.clear();
+        bool ok = search(0);
+        if (ok) {
+            cout << "Case #" << t << ": " << 0 << " " << "INDEFINITELY" << endl;
+            continue;
+        }
+        sort(solution.begin(), solution.end(), [](const auto &a, const auto &b) {
+            if (a.first > b.first) {
+                return true;
+            } else if (a.first < b.first) {
+                return false;
+            } else if (a.second >= b.second) {
+                return true;
+            } else {
+                return false;
+            }
+        });
+        /* for (auto &[t, m] : solution) cout << t << " " << m << endl; */
+        int time, m;
+        tie(time, m) = solution[0];
+		cout << "Case #" << t << ": " << n - m << " ";
+        if (time == INF) {
             cout << "INDEFINITELY" << endl;
         } else {
-            cout << best_time << endl;
+            cout << time << endl;
         }
 
 	}

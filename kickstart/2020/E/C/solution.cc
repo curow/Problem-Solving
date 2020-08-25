@@ -3,30 +3,33 @@
 using namespace std;
 
 const int N = 1e5 + 10, INF = 1e18;
-int n;
-int best_time, best_remain;
-int e[N], r[N], v[N];
+int n, best_time, best_remain;
+int e[N], r[N];
 vector<int> subset;
 bool search(int k) {
     if (k == n) {
         if (subset.empty()) return false;
         int m = subset.size();
+        int s = 0;
         for (int i = 0; i < m; ++i) {
-            v[subset[i]] = -INF;
+            s += e[subset[i]];
         }
-        int time = 0, i = 0;
-        while (i < 2 * m && time - v[subset[i % m]] >= r[subset[i % m]]) {
-            time += e[subset[i % m]];
-            v[subset[i % m]] = time;
-            i += 1;
+        int time = s, i = 0;
+        while (i < m) {
+            if (s - e[subset[i]] >= r[subset[i]]) time += e[subset[i++]];
+            else break;
         }
-        if (i == 2 * n) {
+        if (i == n) {
             best_time = INF;
             best_remain = n;
             return true;
-        } else if (i == 2 * m) {
-            best_time = INF;
-            best_remain = max(best_remain, m);
+        } else if (i == m) {
+            if (best_time == INF) {
+                best_remain = max(best_remain, m);
+            } else {
+                best_time = INF;
+                best_remain = m;
+            }
             return false;
         } else {
             if (time > best_time) {
@@ -61,15 +64,14 @@ __int32_t main() {
         for (int i = 0; i < n; ++i) {
             cin >> e[i] >> r[i];
         }
-        solution.clear();
+        subset.clear();
+        best_time = 0, best_remain = 0;
         search(0);
-        int time, m;
-        tie(time, m) = solution[0];
-		cout << "Case #" << t << ": " << n - m << " ";
-        if (time == INF) {
+		cout << "Case #" << t << ": " << n - best_remain << " ";
+        if (best_time == INF) {
             cout << "INDEFINITELY" << endl;
         } else {
-            cout << time << endl;
+            cout << best_time << endl;
         }
 
 	}
