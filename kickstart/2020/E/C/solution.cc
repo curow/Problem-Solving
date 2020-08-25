@@ -4,9 +4,9 @@ using namespace std;
 
 const int N = 1e5 + 10, INF = 1e18;
 int n;
+int best_time, best_remain;
 int e[N], r[N], v[N];
 vector<int> subset;
-vector<pair<int, int>> solution;
 bool search(int k) {
     if (k == n) {
         if (subset.empty()) return false;
@@ -21,13 +21,20 @@ bool search(int k) {
             i += 1;
         }
         if (i == 2 * n) {
-            solution.push_back({INF, n});
+            best_time = INF;
+            best_remain = n;
             return true;
         } else if (i == 2 * m) {
-            solution.push_back({INF, m});
+            best_time = INF;
+            best_remain = max(best_remain, m);
             return false;
         } else {
-            solution.push_back({time, m});
+            if (time > best_time) {
+                best_time = time;
+                best_remain = m;
+            } else if (time == best_time) {
+                best_remain = max(best_remain, m);
+            }
             return false;
         }
     } else {
@@ -56,17 +63,6 @@ __int32_t main() {
         }
         solution.clear();
         search(0);
-        sort(solution.begin(), solution.end(), [](const auto &a, const auto &b) {
-            if (a.first > b.first) {
-                return true;
-            } else if (a.first < b.first) {
-                return false;
-            } else if (a.second >= b.second) {
-                return true;
-            } else {
-                return false;
-            }
-        });
         int time, m;
         tie(time, m) = solution[0];
 		cout << "Case #" << t << ": " << n - m << " ";
