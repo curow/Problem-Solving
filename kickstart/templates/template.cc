@@ -6,8 +6,8 @@ __int32_t main() {
     #ifdef TIMING 
     auto start = chrono::steady_clock::now();
     #endif
-    cin.sync_with_stdio(false);
-    cin.tie(NULL);
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
 
     // solve the problem
 	int T;
