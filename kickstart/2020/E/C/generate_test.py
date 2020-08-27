@@ -1,5 +1,9 @@
+import random
+from datetime import datetime
 from random import randrange
-T = int(1e6)
+random.seed(datetime.now())
+
+T = int(1e5)
 N = 12
 MAX = int(1e9)
 x = lambda : randrange(1, MAX + 1)
