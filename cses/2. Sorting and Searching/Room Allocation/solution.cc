@@ -24,7 +24,7 @@ __int32_t main() {
             return a.first < b.first;
         }
     }; // sort first by end time, then by room label
-    set<pair<int, int>, decltype(compare)> room(compare); // store {room index, end time}
+    set<pair<int, int>, decltype(compare)> rooms(compare); // store {room index, end time}
 
     for (int i = 0; i < n; ++i) {
         int s, e;
@@ -47,32 +47,17 @@ __int32_t main() {
 
     int k = 0;
     for (auto [i, s, e] : info) {
-        #ifdef DEBUG
-        cout << i << " " << s << " " << e << endl;
-        cout << "room condition:" << endl;
-        for (auto [room_label, end_time] : room) {
-            cout << room_label << ":" << end_time << endl;
-        }
-        cout << "search for room end before " << s << endl;
-        #endif
-        auto it = room.lower_bound({-1, s});
-        if (it == room.begin()) {
+        auto it = rooms.lower_bound({-1, s});
+        if (it == rooms.begin()) {
             ++k;
-            room.insert({k, e});
+            rooms.insert({k, e});
             solution[i] = {i, k};
-            #ifdef DEBUG
-            cout << "currently no room end before " << s << endl;
-            cout << "add room " << k << " end at " << e << endl;
-            #endif
         } else {
             it = prev(it);
             int j = (*it).first;
-            room.erase(it);
-            room.insert({j, e});
+            rooms.erase(it);
+            rooms.insert({j, e});
             solution[i] = {i, j};
-            #ifdef DEBUG
-            cout << "update room " << j << " to end at " << e << endl;
-            #endif
         }
     }
     sort(solution.begin(), solution.end()); // sort by order index
