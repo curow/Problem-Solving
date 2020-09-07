@@ -9,6 +9,9 @@ __pycache__/
 *.so
 a.out
 
+# C++ debug files
+*.dSYM
+
 # Distribution / packaging
 .Python
 build/
