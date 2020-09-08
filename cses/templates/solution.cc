@@ -6,6 +6,10 @@ __int32_t main() {
     #ifdef TIMING 
     auto start = chrono::steady_clock::now();
     #endif
+    #ifdef DEBUG
+    freopen("input.txt", "r", stdin); // redirects standard input
+    freopen("output.txt", "w", stdout); // redirects standard output
+    #endif
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
