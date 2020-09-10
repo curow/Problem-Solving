@@ -62,7 +62,7 @@ __int32_t main() {
         int prev_median = median;
         median = *left.rbegin();
         s += abs(median - a[i]) - abs(prev_median - a[i - k])
-             + ((k + 1) / 2 - 1 - k / 2) * (median - prev_median);
+             - ((k + 1) % 2) * (median - prev_median);
         cout << s << " ";
     }
 
