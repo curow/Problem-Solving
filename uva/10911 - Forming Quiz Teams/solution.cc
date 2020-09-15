@@ -4,10 +4,11 @@ using namespace std;
 const int N = 20;
 const double INF = 2e9;
 
-array<int, 2> pos[N];
-double best = INF;
 bool available[N];
+int x[N], y[N];
+
 int n;
+double best;
 
 void search(int k, double s) {
     if (k == n) {
@@ -20,9 +21,8 @@ void search(int k, double s) {
     for (int j = i + 1; j < 2 * n; ++j) {
         if (available[j]) {
             available[j] = false;
-            double d = sqrt(pow(pos[i][0] - pos[j][0], 2)
-                            + pow(pos[i][1] - pos[j][1], 2));
-            search(k + 1, s + d);
+            double dist = hypot(x[i] - x[j], y[i] - y[j]);
+            search(k + 1, s + dist);
             available[j] = true;
         }
     }
@@ -39,18 +39,15 @@ int main() {
     #endif
 
     // solve the problem
-    char str[100];
-    int x, y;
-    int t = 1;
+    int rounds = 0;
     while (scanf("%d", &n), n != 0) {
         for (int i = 0; i < 2 * n; ++i) {
-            scanf("%s %d %d", str, &x, &y);
-            pos[i] = {x, y};
+            scanf("%*s %d %d", &x[i], &y[i]);
             available[i] = true;
         }
         best = INF;
         search(0, 0);
-        printf("Case %d: %.2f\n", t++, best);
+        printf("Case %d: %.2f\n", ++rounds, best);
     }
 
     #ifdef TIMING 
