@@ -1,9 +1,7 @@
 #include <bits/stdc++.h>
-#define int __int64_t
-#define endl '\n'
 using namespace std;
 
-__int32_t main() {
+int main() {
     #ifdef TIMING 
     auto start = chrono::steady_clock::now();
     #endif
@@ -11,8 +9,6 @@ __int32_t main() {
     freopen("input.txt", "r", stdin); // redirects standard input
     freopen("output.txt", "w", stdout); // redirects standard output
     #endif
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
 
     // solve the problem
 
