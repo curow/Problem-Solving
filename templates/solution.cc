@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 #define int __int64_t
+#define endl '\n'
 using namespace std;
 
 __int32_t main() {
