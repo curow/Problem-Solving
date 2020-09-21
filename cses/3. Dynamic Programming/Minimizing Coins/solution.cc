@@ -16,18 +16,14 @@ int main() {
     // solve the problem
     int n, x;
     cin >> n >> x;
-    int c[n + 1];
-    for (int i = 1; i <= n; ++i) {
-        cin >> c[i];
-    }
+    int c[n];
+    for (int i = 0; i < n; ++i) cin >> c[i];
     f[0] = 0;
-    for (int j = 1; j <= x; ++j) {
-        f[j] = INF;
-    }
-    for (int i = 1; i <= n; ++i) {
-        for (int j = x; j >= 1; --j) {
-            for (int k = 1; k * c[i] <= j; ++k) {
-                f[j] = min(f[j], f[j - k * c[i]] + k);
+    for (int i = 1; i <= x; ++i) {
+        f[i] = INF;
+        for (int j = 0; j < n; ++j) {
+            if (c[j] <= i) {
+                f[i] = min(f[i], f[i - c[j]] + 1);
             }
         }
     }
