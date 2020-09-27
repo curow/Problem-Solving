@@ -11,14 +11,6 @@ int main() {
     #endif
 
     // solve the problem
-	int T;
-	cin >> T;
-	for (int t = 1; t <= T; ++t) {
-        int n;
-		cin >> n;
-
-		cout << "Case #" << t << ": " << endl;
-	}
 
     #ifdef TIMING 
     auto end = chrono::steady_clock::now();

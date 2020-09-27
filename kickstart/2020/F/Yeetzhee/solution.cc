@@ -14,8 +14,10 @@ int main() {
 	int T;
 	cin >> T;
 	for (int t = 1; t <= T; ++t) {
-        int n;
-		cin >> n;
+        int n, m, k;
+		cin >> n, m, k;
+        vector<int> v(k);
+        for (auto &x : v) cin >> x;
 
 		cout << "Case #" << t << ": " << endl;
 	}
