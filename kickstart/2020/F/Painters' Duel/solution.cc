@@ -5,80 +5,45 @@ const int S = 10, INF = 1e9;
 bool painted[S + 1][2 * S];
 int s;
 
-vector<pair<int, int>> neighbors(const pair<int, int> x) {
+vector<pair<int, int>> possible_moves(const pair<int, int> x) {
     int r, p;
     tie(r, p) = x;
-    vector<pair<int, int>> v;
+    vector<pair<int, int>> moves;
     if (p - 1 >= 1 && !painted[r][p - 1])
-        v.push_back({r, p - 1});
+        moves.push_back({r, p - 1});
     if (p + 1 <= 2 * r - 1 && !painted[r][p + 1])
-        v.push_back({r, p + 1});
+        moves.push_back({r, p + 1});
     if (p % 2 == 0 && r - 1 >= 1 && p - 1 >= 1 && !painted[r - 1][p - 1])
-        v.push_back({r - 1, p - 1});
+        moves.push_back({r - 1, p - 1});
     if (p % 2 == 1 && r + 1 <= s && p + 1 <= 2 * (r + 1) - 1 && !painted[r + 1][p + 1])
-        v.push_back({r + 1, p + 1});
-    return v;
+        moves.push_back({r + 1, p + 1});
+    return moves;
 }
 
-int search(const pair<int, int> a, const pair<int, int> b) {
-    /* cout << "\na: " << a.first << a.second << endl; */
-    /* cout << "b: " << b.first << b.second << endl; */
-    auto u = neighbors(a), v = neighbors(b);
-    if (u.empty() && v.empty()) {
-        /* cout << "a and b neighbor empty" << endl; */
-        return 0;
-    } else if (u.empty()) {
-        /* cout << "a neighbor empty" << endl; */
-        int worst_score = INF;
-        for (const auto &y : v) {
-            painted[y.first][y.second] = true;
-            int score = search(a, y);
-            if (score < worst_score) {
-                worst_score = score;
-            }
-            painted[y.first][y.second] = false;
-        }
-        return -1 + worst_score;
-    } else if (v.empty()) {
-        /* cout << "b neighbor empty" << endl; */
-        int best_score = -INF;
-        for (const auto &x : u) {
+int search(bool a_should_move, pair<int, int> a, pair<int, int> b) {
+    auto a_moves = possible_moves(a), b_moves = possible_moves(b);
+    if (a_moves.empty() && b_moves.empty()) return 0;
+    if (a_should_move) {
+        if (a_moves.empty()) return search(false, a, b);
+        int max_score = -INF;
+        for (pair<int, int> x : a_moves) {
             painted[x.first][x.second] = true;
-            int score = search(x, b);
-            if (score > best_score) {
-                best_score = score;
-            }
+            int score = search(false, x, b);
+            max_score = max(max_score, score);
             painted[x.first][x.second] = false;
         }
-        return 1 + best_score;
-    }
-    int best_score = -INF;
-    for (const auto &x : u) {
-        painted[x.first][x.second] = true;
-        vector<pair<int, int>> v = neighbors(b);
-        if (v.empty()) {
-            int score = 1 + search(x, b);
-            if (score > best_score) {
-                best_score = score;
-            }
-        } else {
-            int worst_score = INF;
-            for (const auto &y : v) {
-                painted[y.first][y.second] = true;
-                int score = search(x, y);
-                if (score < worst_score) {
-                    worst_score = score;
-                }
-                painted[y.first][y.second] = false;
-            }
-            int score = worst_score;
-            if (score > best_score) {
-                best_score = score;
-            }
+        return max_score + 1;
+    } else {
+        if (b_moves.empty()) return search(true, a, b);
+        int min_score = INF;
+        for (pair<int, int> x : b_moves) {
+            painted[x.first][x.second] = true;
+            int score = search(true, a, x);
+            min_score = min(min_score, score);
+            painted[x.first][x.second] = false;
         }
-        painted[x.first][x.second] = false;
+        return min_score - 1;
     }
-    return best_score;
 }
 
 int main() {
@@ -101,13 +66,14 @@ int main() {
                 painted[i][j] = false;
             }
         }
+        painted[ra][pa] = painted[rb][pb] = true;
         for (int i = 0; i < c; ++i) {
             int r, p;
             cin >> r >> p;
             painted[r][p] = true;
         }
         pair<int, int> a = {ra, pa}, b = {rb, pb};
-		cout << "Case #" << t << ": " << search(a, b) << endl;
+		cout << "Case #" << t << ": " << search(true, a, b) << endl;
 	}
 
     #ifdef TIMING 
