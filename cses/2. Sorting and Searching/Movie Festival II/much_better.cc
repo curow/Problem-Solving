@@ -13,14 +13,26 @@ int main() {
 #endif
 
     // solve the problem
-
-    int T;
-    cin >> T;
-    for (int t = 1; t <= T; ++t) {
-        int n;
-        cin >> n;
-        cout << "Case #" << t << ": " << endl;
+    size_t n, k;
+    cin >> n >> k;
+    vector<pair<int, int>> a(n);
+    for (auto &[s, e] : a) cin >> s >> e;
+    sort(a.begin(), a.end());
+    multiset<int> end_times;
+    int ans = 0;
+    for (const auto &[s, e] : a) {
+        while (!end_times.empty() && *end_times.begin() <= s) {
+            end_times.erase(end_times.begin());
+        }
+        if (end_times.size() < k) {
+            ++ans;
+            end_times.insert(e);
+        } else if (*end_times.rbegin() > e) {
+            end_times.erase(--end_times.end());
+            end_times.insert(e);
+        }
     }
+    cout << ans << endl;
 
 #ifdef TIMING
     auto end = chrono::steady_clock::now();
