@@ -2,29 +2,32 @@
 using namespace std;
 
 int main() {
-    #ifdef TIMING 
+#ifdef TIMING
     auto start = chrono::steady_clock::now();
-    #endif
-    #ifdef DEBUG
-    freopen("input.txt", "r", stdin); // redirects standard input
-    freopen("output.txt", "w", stdout); // redirects standard output
-    #endif
+#endif
+    ios_base::sync_with_stdio(0);
+    cin.tie(nullptr);
+#ifdef DEBUG
+    freopen("input.txt", "r", stdin);  // redirects standard input
+    /* freopen("output.txt", "w", stdout); // redirects standard output */
+#endif
 
     // solve the problem
-	int T;
-	cin >> T;
-	for (int t = 1; t <= T; ++t) {
+
+    int T;
+    cin >> T;
+    for (int t = 1; t <= T; ++t) {
         int n;
-		cin >> n;
+        cin >> n;
 
-		cout << "Case #" << t << ": " << endl;
-	}
+        cout << "Case #" << t << ": " << endl;
+    }
 
-    #ifdef TIMING 
+#ifdef TIMING
     auto end = chrono::steady_clock::now();
     cout << "\nElapsed time in milliseconds : "
          << chrono::duration_cast<chrono::milliseconds>(end - start).count()
          << " ms\n";
-    #endif
+#endif
     return 0;
 }
