@@ -1,6 +1,16 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+void solve() {
+    int T;
+    cin >> T;
+    for (int t = 1; t <= T; ++t) {
+        int n;
+        cin >> n;
+        cout << "Case #" << t << ": " << endl;
+    }
+}
+
 int main() {
 #ifdef TIMING
     auto start = chrono::steady_clock::now();
@@ -11,17 +21,8 @@ int main() {
     freopen("input.txt", "r", stdin);  // redirects standard input
     /* freopen("output.txt", "w", stdout); // redirects standard output */
 #endif
-
     // solve the problem
-
-    int T;
-    cin >> T;
-    for (int t = 1; t <= T; ++t) {
-        int n;
-        cin >> n;
-        cout << "Case #" << t << ": " << endl;
-    }
-
+    solve();
 #ifdef TIMING
     auto end = chrono::steady_clock::now();
     cout << "\nElapsed time in milliseconds : "
