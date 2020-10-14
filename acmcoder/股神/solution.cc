@@ -15,9 +15,7 @@ void solve() {
     int n;
     while (cin >> n) {
         int k = search(n);
-        int s = 1;
-        if (k >= 3) s += (k - 2) * (k - 1) / 2;
-        cout << s + (n - k * (k + 1) / 2) << endl;
+        cout << 1 + (k - 2) * (k - 1) / 2 + (n - k * (k + 1) / 2) << endl;
     }
 }
 
