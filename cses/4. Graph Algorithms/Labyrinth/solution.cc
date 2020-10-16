@@ -5,7 +5,7 @@ const int N = 1e3 + 10;
 char maze[N][N];
 int n, m;
 vector<tuple<int, int, char>> directions = {{-1, 0, 'U'}, {1, 0, 'D'}, {0, -1, 'L'}, {0, 1, 'R'}};
-map<char, pair<int, int>> back_home = {{'D', {-1, 0}}, {'U', {1, 0}}, {'R', {0, -1}}, {'L', {0, 1}}};
+map<char, pair<int, int>> reverse_directions = {{'D', {-1, 0}}, {'U', {1, 0}}, {'R', {0, -1}}, {'L', {0, 1}}};
 
 vector<char> solution;
 bool bfs(int x, int y) {
@@ -23,7 +23,7 @@ bool bfs(int x, int y) {
                 while (maze[x][y] != 'A') {
                     solution.push_back(maze[x][y]);
                     int dx, dy;
-                    tie(dx, dy) = back_home[maze[x][y]];
+                    tie(dx, dy) = reverse_directions[maze[x][y]];
                     x += dx, y += dy;
                 }
                 reverse(solution.begin(), solution.end());
