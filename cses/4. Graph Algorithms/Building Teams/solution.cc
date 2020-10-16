@@ -6,6 +6,18 @@ vector<int> adj[N];
 bool visited[N];
 int team[N];
 
+bool dfs(int s) {
+    for (int x : adj[s]) {
+        if (visited[x]) {
+            if (team[x] == team[s]) return false;
+            else continue;
+        }
+        visited[x] = true;
+        team[x] = 3 - team[s];
+        if (!dfs(x)) return false;
+    }
+    return true;
+}
 void solve() {
     int n, m;
     cin >> n >> m;
@@ -17,25 +29,11 @@ void solve() {
     }
     for (int i = 1; i <= n; ++i) {
         if (visited[i]) continue;
-        queue<int> q;
-        q.push(i);
-        team[i] = 1;
         visited[i] = true;
-        while (!q.empty()) {
-            int s = q.front(); q.pop();
-            for (int x : adj[s]) {
-                if (visited[x]) {
-                    if (team[x] == team[s]) {
-                        cout << "IMPOSSIBLE" << endl;
-                        return;
-                    } else {
-                        continue;
-                    }
-                }
-                q.push(x);
-                team[x] = 3 - team[s];
-                visited[x] = true;
-            }
+        team[i] = 1;
+        if (!dfs(i)) {
+            cout << "IMPOSSIBLE" << endl;
+            return;
         }
     }
     for (int i = 1; i <= n; ++i) cout << team[i] << " ";
