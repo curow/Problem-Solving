@@ -1,0 +1,5 @@
+YES
+9
+LDDRRRRRU
+
+Elapsed time in milliseconds : 0 ms
