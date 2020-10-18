@@ -14,9 +14,16 @@ map<char, pair<int, int>> directions = {
 map<char, char> reverse_direction = {
     {'U', 'D'}, {'D', 'U'}, {'L', 'R'}, {'R', 'L'}
 };
+
+bool should_skip(int i, int j) {
+    if (i < 1 || i > n || j < 1 || j > m) return true;
+    if (visited[i][j] || maze[i][j] == '#' || maze[i][j] == 'M') return true;
+    return false;
+}
  
 void solve() {
     cin >> n >> m;
+    monsters.reserve(n * m);
     for (int i = 1; i <= n; ++i) {
         for (int j = 1; j <= m; ++j) {
             cin >> maze[i][j];
@@ -31,64 +38,56 @@ void solve() {
             }
         }
     }
-    if (si == 1 || si == n || sj == 1 || sj == m) {
-        cout << "YES" << endl;
-        cout << 0 << endl;
-        return;
-    }
+    queue<tuple<int, int, int>> q;
     for (auto [mi, mj] : monsters) {
-        queue<tuple<int, int, int>> q;
         q.push({mi, mj, 0});
         visited[mi][mj] = true;
-        while (!q.empty()) {
-            int i, j, d;
-            tie(i, j, d) = q.front();
-            q.pop();
-            for (const auto [_, delta] : directions) {
-                int ni = i + delta.first, nj = j + delta.second;
-                if (ni < 1 || ni > n || nj < 1 || nj > m) continue;
-                if (visited[ni][nj] || maze[ni][nj] == '#' || maze[ni][nj] == 'M') continue;
-                danger[ni][nj] = min(danger[ni][nj], d + 1);
-                q.push({ni, nj, d + 1});
-                visited[ni][nj] = true;
-            }
-        }
-        for (int i = 1; i <= n; ++i) {
-            for (int j = 1; j <= m; ++j) {
-                visited[i][j] = false;
-            }
+    }
+    while (!q.empty()) {
+        int i, j, d;
+        tie(i, j, d) = q.front();
+        q.pop();
+        for (const auto [_, delta] : directions) {
+            int ni = i + delta.first, nj = j + delta.second;
+            if (should_skip(ni, nj)) continue;
+            danger[ni][nj] = d + 1;
+            q.push({ni, nj, d + 1});
+            visited[ni][nj] = true;
         }
     }
-    queue<tuple<int, int, int>> q;
+    for (int i = 1; i <= n; ++i) {
+        for (int j = 1; j <= m; ++j) {
+            visited[i][j] = false;
+        }
+    }
     q.push({si, sj, 0});
     visited[si][sj] = true;
     while (!q.empty()) {
         int i, j, d;
         tie(i, j, d) = q.front();
         q.pop();
-        for (const auto [ch, delta] : directions) {
+        if (i == 1 || i == n || j == 1 || j == m) {
+            string solution = "";
+            int ti = i, tj = j;
+            while (maze[ti][tj] != 'A') {
+                char code = maze[ti][tj];
+                solution += code;
+                ti += directions[reverse_direction[code]].first;
+                tj += directions[reverse_direction[code]].second;
+            }
+            reverse(solution.begin(), solution.end());
+            cout << "YES" << endl;
+            cout << solution.size() << endl;
+            if (!solution.empty()) cout << solution << endl;
+            return;
+        }
+        for (const auto [code, delta] : directions) {
             int ni = i + delta.first, nj = j + delta.second;
-            if (ni < 1 || ni > n || nj < 1 || nj > m) continue;
-            if (visited[ni][nj] || maze[ni][nj] == '#' || maze[ni][nj] == 'M') continue;
+            if (should_skip(ni, nj)) continue;
             if (danger[ni][nj] > d + 1) {
                 q.push({ni, nj, d + 1});
                 visited[ni][nj] = true;
-                maze[ni][nj] = ch;
-                if (ni == 1 || ni == n || nj == 1 || nj == m) {
-                    string solution = "";
-                    int ti = ni, tj = nj;
-                    while (maze[ti][tj] != 'A') {
-                        char code = maze[ti][tj];
-                        solution += code;
-                        ti += directions[reverse_direction[code]].first;
-                        tj += directions[reverse_direction[code]].second;
-                    }
-                    reverse(solution.begin(), solution.end());
-                    cout << "YES" << endl;
-                    cout << solution.size() << endl;
-                    cout << solution << endl;
-                    return;
-                }
+                maze[ni][nj] = code;
             }
         }
     }
