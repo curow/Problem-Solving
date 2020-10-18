@@ -15,7 +15,7 @@ int main() {
 #ifdef TIMING
     auto start = chrono::steady_clock::now();
 #endif
-    ios_base::sync_with_stdio(0);
+    ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
 #ifdef DEBUG
     freopen("input.txt", "r", stdin);  // redirects standard input
