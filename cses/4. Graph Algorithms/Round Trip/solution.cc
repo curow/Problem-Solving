@@ -4,27 +4,32 @@ using namespace std;
 const int N = 1e5 + 10;
 vector<int> adj[N];
 bool visited[N];
+int parent[N];
 
 vector<int> route;
-int dfs(int s) {
-    if (visited[s]) {
-        int len = route.size();
-        if (len <= 3) return 0;
-        int cnt = 1;
-        do {
-            ++cnt;
-        } while (len - cnt >= 0 && route[len - cnt] != route.back());
-        if (cnt >= 4) return cnt;
-        else return 0;
-    }
+bool dfs(int s, int p) {
     visited[s] = true;
+    parent[s] = p;
     for (int x : adj[s]) {
-        route.push_back(x);
-        int cnt = dfs(x);
-        if (cnt) return cnt;
-        route.pop_back();
+        if (visited[x]) {
+            if (x == p) continue;
+            vector<int> circle;
+            circle.push_back(x);
+            for (int v = s; v != x; v = parent[v]) {
+                circle.push_back(v);
+            }
+            circle.push_back(x);
+            cout << circle.size() << endl;
+            for (int v : circle) {
+                cout << v << " ";
+            }
+            cout << endl;
+            return true;
+        } else if (dfs(x, s)) {
+            return true;
+        }
     }
-    return 0;
+    return false;
 }
 
 void solve() {
@@ -38,16 +43,7 @@ void solve() {
     }
     for (int i = 1; i <= n; ++i) {
         if (visited[i]) continue;
-        route.push_back(i);
-        int cnt = dfs(i);
-        if (cnt) {
-            cout << cnt << endl;
-            int len = route.size();
-            for (int j = len - cnt; j <= len - 1; ++j) cout << route[j] << " ";
-            cout << endl;
-            return;
-        }
-        route.pop_back();
+        if (dfs(i, -1)) return;
     }
     cout << "IMPOSSIBLE" << endl;
 }
