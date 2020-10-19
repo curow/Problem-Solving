@@ -1,22 +1,29 @@
 #include <bits/stdc++.h>
 using namespace std;
+typedef long long ll;
 
-long double expected_score(vector<long long> &cards) {
+ll total_score;
+ll case_count;
+void dfs(vector<ll> &cards, ll score) {
+    /* for (auto &x : cards) cout << x << " "; */
+    /* cout << endl; */
+    /* cout << "score: " << score << endl; */
     size_t len = cards.size();
-    /* if (len <= 2) return accumulate(cards.begin(), cards.end(), 0LL); */
-    if (len == 1) return 0;
-    long double score = 0;
-    for (size_t i = 0; i < len - 1; ++i) {
-        vector<long long> new_cards;
-        long long merged_card = cards[i] + cards[i + 1];
+    if (len == 1) {
+        total_score += score;
+        ++case_count;
+        return;
+    }
+    for (size_t i = 0; i <= len - 2; ++i) {
+        vector<ll> new_cards;
+        ll merged_card = cards[i] + cards[i + 1];
         for (size_t j = 0; j < len; ++j) {
             if (j == i) new_cards.push_back(merged_card);
             else if (j == i + 1) continue;
             else new_cards.push_back(cards[j]);
         }
-        score += expected_score(new_cards) + merged_card;
+        dfs(new_cards, score + merged_card);
     }
-    return score / (len - 1);
 }
 
 void solve() {
@@ -25,13 +32,13 @@ void solve() {
     for (int t = 1; t <= T; ++t) {
         int n;
         cin >> n;
-        vector<long long> cards(n);
-        for (int i = 0; i < n; ++i) {
-            cin >> cards[i];
-        }
-        cout << fixed << showpoint;
-        cout << setprecision(16);
-        cout << "Case #" << t << ": " << expected_score(cards) << endl;
+        vector<ll> cards(n);
+        for (auto &x : cards) cin >> x;
+        total_score = case_count = 0;
+        dfs(cards, 0);
+        long double expected_score = (long double)total_score / case_count;
+        cout << fixed << setprecision(16);
+        cout << "Case #" << t << ": " << expected_score << endl;
     }
 }
 
