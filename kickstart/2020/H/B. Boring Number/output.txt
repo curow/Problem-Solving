@@ -1,0 +1,6 @@
+Case #1: 30
+Case #2: 6
+Case #3: 3
+Case #4: 0
+
+Elapsed time in milliseconds : 0 ms

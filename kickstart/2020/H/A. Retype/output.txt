@@ -1,0 +1,4 @@
+Case #1: 15
+Case #2: 12
+
+Elapsed time in milliseconds : 0 ms
