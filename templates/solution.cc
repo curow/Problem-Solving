@@ -1,6 +1,16 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+#define f first
+#define s second
+
+typedef long long ll;
+typedef long double lld;
+typedef unsigned long long ull;
+
+const lld pi = 3.14159265358979323846;
+const ll mod = 1000000007;
+
 void solve() {
     int T;
     cin >> T;
