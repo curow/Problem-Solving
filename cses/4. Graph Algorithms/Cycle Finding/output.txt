@@ -1,0 +1,4 @@
+YES
+13 4 2 18 5 13
+
+Elapsed time in milliseconds : 0 ms
