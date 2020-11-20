@@ -6,8 +6,8 @@ typedef long double lld;
 typedef unsigned long long ull;
 typedef pair<long long, long long> pll;
 
-const lld pi = 3.14159265358979323846;
-const ll mod = 1000000007;
+const lld PI = 3.14159265358979323846;
+const ll MOD = 1000000007;
 const ll INF = 1e18;
 
 void solve() {
