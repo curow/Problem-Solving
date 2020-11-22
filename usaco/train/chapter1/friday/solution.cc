@@ -23,7 +23,7 @@ bool is_leap_year(ll year) {
     }
 }
 
-ll day_of_month(ll year, ll month) {
+ll days_of_month(ll year, ll month) {
     switch (month) {
         case 9:
         case 4:
@@ -41,26 +41,18 @@ ll day_of_month(ll year, ll month) {
 void solve() {
     ll n;
     cin >> n;
-    ll year = 1900, month = 1, day = 1;
     map<ll, ll> thirteen;
-    ll weekday = 1;
-    while (year != 1900 + n - 1 || month != 12 || day != 31) {
-        if (day == 13) ++thirteen[weekday];
-        weekday = weekday % 7 + 1;
-        day += 1;
-        if (day > day_of_month(year, month)) {
-            day = 1;
-            month += 1;
-            if (month > 12) {
-                month = 1;
-                year += 1;
-            }
+    ll weekday = 12 % 7;
+    for (ll year = 1900; year <= 1900 + n - 1; ++year) {
+        for (ll month = 1; month <= 12; ++month) {
+            ++thirteen[weekday];
+            weekday = (weekday + days_of_month(year, month)) % 7;
         }
     }
-    vector<ll> order = {6, 7, 1, 2, 3, 4, 5};
+    vector<ll> order = {5, 6, 0, 1, 2, 3, 4};
     for (ll x : order) {
         cout << thirteen[x];
-        if (x == 5) cout << endl;
+        if (x == 4) cout << endl;
         else cout << " ";
     }
 }
