@@ -1,0 +1,7 @@
+dave 302
+laura 66
+owen -359
+vick 141
+amr -150
+
+Elapsed time in milliseconds : 0 ms
